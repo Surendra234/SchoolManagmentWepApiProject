@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagmentSystem.Data;
-using SchoolManagmentSystem.Models;
 
 namespace SchoolManagmentSystem.Controllers;
 
 [Route(template: "api/")]
 public class HomeController : Controller
 {
+   
+    MyMethod method = new MyMethod();
+
     // Connection String
     MySqlConnector.MySqlConnection connection = new MySqlConnector.MySqlConnection(connectionString: "Server=localhost;port=3306;Database=SchoolManagmentSystem;user=root;password=root@1234;Persist security Info=true");
 
@@ -17,164 +19,130 @@ public class HomeController : Controller
         _dbContext = dbContext;
     }
 
-  
     // Add Student
     [HttpPost("add_student")]
     public IActionResult AddStudent([FromBody] Students student)
     {
-        var responce = new ResponseModel<Students>();
-        connection.Open();
+        var output = new ResponseModel<Students>();
 
-        MySqlConnector.MySqlCommand command = new MySqlConnector.MySqlCommand("sp_add_student", connection);
         try
         {
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@fname", student.fname);
-            command.Parameters.AddWithValue("@lname", student.lname);
-            command.Parameters.AddWithValue("@gender", student.gender);
-            command.Parameters.AddWithValue("@age", student.age);
-            command.Parameters.AddWithValue("@contact_no", student.contact_no);
-            command.Parameters.AddWithValue("@stud_email", student.stud_email);
-            command.Parameters.AddWithValue("@stud_pass", student.stud_pass);
-
-            var result = command.ExecuteNonQuery();
-
-            if (result>0)
+            var result = method.AddStudent(student, connection);
+            if (result > 0)
             {
-                responce.success = true;
-                responce.message = "student added successfully";
+                output.message = "Student Added successfully";
+                output.success = true;
             }
             else
-            { 
-                responce.success = false;
-                responce.message = "Failed to add student";
-                  
+            {
+                output.message = "Failed To Added Student details";
+                output.success = false;
             }
-            connection.Close();
+            return Ok(output);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
-            responce.success = true;
-            responce.message = ex.Message;
+            output.message = ex.Message;
+            output.success = false;
+            return Ok(output);
         }
-        return Ok(responce);
+    }
+
+    [HttpGet("get_all_students")]
+    public IActionResult GetAllStudents([FromHeader] string email, [FromHeader] string password)
+    {
+        var output = new ResponseModel<Students>();
+        try
+        {
+            var result = method.GetAllStudents(email, password, connection);
+            output.message = "Students list find successfully";
+            output.success = true;
+            output.data = result;
+            return Ok(output);
+        }
+        catch(Exception ex)
+        {
+            output.message = ex.Message;
+            output.success = false;
+            return Ok(output);
+        }
     }
 
     // Get Student By Id
     [HttpGet("get_student_by_studID")]
     public IActionResult GetStudentById(int id)
     {
-        ResponseModel<Students> responce = new ResponseModel<Students>();
-        connection.Open();
+        var output = new ResponseModel<Students>();
 
-        MySqlConnector.MySqlCommand command = new MySqlConnector.MySqlCommand("sp_get_student_by_studID", connection);
         try
         {
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@_stud_ID", id);
-
-            MySqlConnector.MySqlDataReader read = command.ExecuteReader();
-            read.Read();
-            Students students = new Students();
-            List<Students> studentsList = new List<Students>();
-
-            students.stud_ID = Convert.ToInt32(read["stud_ID"]);
-            students.fname = Convert.ToString(read["fname"]);
-            students.lname = Convert.ToString(read["lname"]);
-            students.gender = Convert.ToString(read["gender"]);
-            students.age = Convert.ToInt32(read["age"]);
-            students.contact_no = Convert.ToInt32(read["contact_no"]);
-            students.stud_email = Convert.ToString(read["stud_email"]);
-            students.stud_pass = Convert.ToString(read["stud_pass"]);
-
-            studentsList.Add(students);
-            if (students.stud_ID == id)
-            {
-                responce.success = true;
-                responce.message = "student find success fully";
-                responce.data = studentsList;
-                return Ok(responce);
-            }
+            var result = method.GetStudent(id, connection);
+            output.message = "Student details find successfully";
+            output.success = true;
+            output.data = result;
+            return Ok(output);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
-            responce.success = false;
-            responce.message = ex.Message;
+            output.message = ex.Message;
+            output.success = false;
+            return Ok(output);
         }
-
-        return Ok(responce);
     }
 
     // Delete Student
-
-    [HttpDelete("delete_student")]
+    [HttpPost("delete_student")]
     public IActionResult DeleteStudent(int id)
     {
-        var response = new ResponseModel<Students>();
-
-        connection.Open();
-        MySqlConnector.MySqlCommand command = new MySqlConnector.MySqlCommand("sp_delete_student", connection);
-
-        command.CommandType = System.Data.CommandType.StoredProcedure;
-        command.Parameters.AddWithValue("@_stud_ID", id);
-
-        var result = command.ExecuteNonQuery();
-        if (result > 0)
+        var output = new ResponseModel<Students>();
+        try
         {
-            response.success = true;
-            response.message = "Student details deleted success fully";
+            var result = method.DeleteStudent(id, connection);
+            if (result > 0)
+            {
+                output.message = "Student Details deleted successfully";
+                output.success = true;
+            }
+            else
+            {
+                output.message = "Failed to delete student";
+                output.success = false;
+            }
+            return Ok(output);
         }
-        else
+        catch(Exception ex)
         {
-            response.success = false;
-            response.message = "faild to delete student details";
+            output.message = ex.Message;
+            output.success = false;
+            return Ok(output);
         }
-        connection.Close();
-        return Ok(response);
     }
 
     [HttpPost("update_student")]
     public IActionResult UpdateStudent(int id, string name, [FromBody] Students students)
     {
-        var response = new ResponseModel<Students>();
-
-        connection.Open();
-        MySqlConnector.MySqlCommand command = new MySqlConnector.MySqlCommand("sp_update_student", connection);
-
+        var output = new ResponseModel<Students>();
         try
         {
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@id", id);
-            command.Parameters.AddWithValue("@name", name);
-
-            command.Parameters.AddWithValue("@_fname", students.fname);
-            command.Parameters.AddWithValue("@_lname", students.lname);
-            command.Parameters.AddWithValue("@_gender", students.gender);
-            command.Parameters.AddWithValue("@_age", students.age);
-            command.Parameters.AddWithValue("@_contact_no", students.contact_no);
-            command.Parameters.AddWithValue("@_stud_email", students.stud_email);
-            command.Parameters.AddWithValue("@_stud_pass", students.stud_pass);
-
-            var result = command.ExecuteNonQuery();
-
+            var result = method.UpdateStudent(id, name, students, connection);
             if (result > 0)
             {
-                response.success = true;
-                response.message = "Student details updated success fully";
+                output.message = "Student Details update successfully";
+                output.success = true;
             }
             else
             {
-                response.success = false;
-                response.message = "failed to update student details";
+                output.message = "Failed to update student";
+                output.success = true;
             }
+            return Ok(result);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
-            response.success = false;
-            response.message = ex.Message;
+            output.message = ex.Message;
+            output.success = false;
+            return Ok(output);
         }
-        connection.Close();
-        return Ok(response);
     }
 }
 

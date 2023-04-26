@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagmentSystem.Models
-{
+{                               
 	public class Instructor
 	{
 		[Key]

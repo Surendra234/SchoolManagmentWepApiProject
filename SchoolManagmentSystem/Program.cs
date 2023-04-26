@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SchoolManagmentSystem;
 using SchoolManagmentSystem.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddTransient<MyMethod>();
 
 var app = builder.Build();
 
@@ -48,6 +50,7 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = String.Empty;
     options.DocumentTitle = "School Managment System";
 });
+
 
 app.Run();
 

@@ -1,8 +1,0 @@
-build:
-  steps:
-    - name: dotnet-build
-      args: --configuration Release
-
-start:
-  command: dotnet run --server.urls=http://0.0.0.0:${PORT:-8080}
-

@@ -1,20 +1,32 @@
 ﻿<Properties StartupConfiguration="{561F945F-D478-42D4-A2FA-42160CA51309}|https">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.SchoolManagmentSystem PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Schedules.cs">
+    <Files>
+      <File FileName="Controllers/HomeController.cs" Line="48" Column="10" />
+      <File FileName="Program.cs" />
+      <File FileName="Models/Subjects.cs" Line="15" Column="25" />
+      <File FileName="Models/Students.cs" Line="1" Column="1" />
+      <File FileName="Models/Schedules.cs" Line="15" Column="45" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SchoolManagmentSystem" expanded="True">
-            <Node name="SchoolManagmentSystem" selected="True" />
+            <Node name="SchoolManagmentSystem" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Schedules.cs" selected="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.SchoolManagmentSystem PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>

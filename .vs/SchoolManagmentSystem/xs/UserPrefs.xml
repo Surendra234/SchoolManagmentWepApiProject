@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{C0DF6E0C-7701-4EE5-A633-53E2D068938E}|https">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/xpindia/Documents/TestingApp/SchoolManagmentWebApiProject/SchoolManagmentSystem/Methods/MyMethods.cs" relfile="SchoolManagmentSystem/Methods/MyMethods.cs" line="70" column="1" />
+      <Breakpoint file="/Users/xpindia/Documents/TestingApp/SchoolManagmentWebApiProject/SchoolManagmentSystem/Methods/MyMethods.cs" relfile="SchoolManagmentSystem/Methods/MyMethods.cs" line="54" column="1" />
+      <Breakpoint file="/Users/xpindia/Documents/TestingApp/SchoolManagmentWebApiProject/SchoolManagmentSystem/Methods/MyMethods.cs" relfile="SchoolManagmentSystem/Methods/MyMethods.cs" line="47" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.SchoolManagmentSystem PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SchoolManagmentSystem/appsettings.json">
+    <Files>
+      <File FileName="SchoolManagmentSystem/Program.cs" Line="9" Column="1" />
+      <File FileName="SchoolManagmentSystem/appsettings.json" Line="4" Column="4" />
+      <File FileName="SchoolManagmentSystem/Controllers/HomeController.cs" Line="13" Column="219" />
+      <File FileName="SchoolManagmentSystem/Models/Students.cs" />
+      <File FileName="SchoolManagmentSystem/LambdaEntryPoint.cs" Line="10" Column="39" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SchoolManagmentSystem" expanded="True">
+            <Node name="SchoolManagmentSystem" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Method" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="appsettings.json" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
